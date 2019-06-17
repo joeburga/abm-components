@@ -1,21 +1,103 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="conteiner app">
+
+  <div class="card">
+
+    <div class="card-header">
+      <h3>Persona</h3>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-8">
+
+          <form action="">
+
+            <div class="form-row">
+              <div class="form-group col-6">
+                <input type="text" class="form-control" name="nombre" [(ngModel)]="person.nombre" placeholder="Nombres"
+                  required>
+              </div>
+
+              <div class="form-group col-6">
+                <input type="text" class="form-control" name="apellido" [(ngModel)]="person.apellido"
+                  placeholder="Apellidos" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-6">
+                <!-- Cuando agrego ngModel debe ir ngModelOptions para que lo agregue en person.
+                  El ngValue para que aparezca Sexo en el placeholder. -->
+                <!-- <select class="custom-select" [(ngModel)]="person.sexo" [ngModelOptions]="{standalone: true}">
+                    <option [ngValue]="undefined">Sexo</option>
+                    <option [value]="'M'">M</option>
+                    <option [value]="'F'">F</option>
+                  </select> -->
+                <select class="custom-select" [(ngModel)]="person.sexo" [ngModelOptions]="{standalone: true}">
+                  <option [ngValue]="undefined">Sexo</option>
+                  <option *ngFor="let gender of gendersList" [ngValue]="gender">{{ gender }}</option>
+                </select>
+              </div>
+
+              <div class="form-group col-6">
+                <input type="date" class="form-control" name="fecha" [(ngModel)]="person.fecha" placeholder="Fecha">
+              </div>
+            </div>
+
+            <div class="form-row" style="margin-bottom: 10px">
+              <div class="col-12">
+                <input type="email" class="form-control" name="email" [(ngModel)]="person.email" placeholder="Email">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-10">
+
+              </div>
+              <div class="col-2">
+                <button style="margin: 5px" type="button" class="btn btn-success"
+                  (click)="savePerson()">Guardar</button>
+                <button style="margin: 5px" type="button" class="btn btn-success" (click)="cancelPerson()">Cancelar</button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+
+        <div class="col-4">
+          <table class="table table-hover">
+
+            <thead class="text-center">
+              <th>Nombre Completo</th>
+              <th>Acciones</th>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let person of personListObj; let i = index">
+                <td>{{person.nombre}} {{person.apellido}}</td>
+                <button style="margin: 5px" type="button" class="btn btn-dark"
+                  (click)="deletePerson(i)">Eliminar</button>
+                <button style="margin-left: 15px" type="button" class="btn btn-danger"
+                  (click)="toggleUpdatePerson(i)">Modificar</button>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row" style="margin-left: 15px">
+            <app-child *ngIf="showToggle" (personUpdateEvent)="childPersonUpdate($event)"
+              (flag)="toggleButtonCancel($event)"></app-child>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
 <router-outlet></router-outlet>

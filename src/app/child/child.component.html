@@ -1,0 +1,47 @@
+<ng-container>
+  <form action="">
+    <div class="form-row">
+
+      <div class="form-group col-6">
+        <input type="text" class="form-control" name="nombre" [(ngModel)]="personUpdate.nombre" placeholder="Nombres">
+      </div>
+
+      <div class="form-group col-6">
+        <input type="text" class="form-control" name="apellido" [(ngModel)]="personUpdate.apellido"
+          placeholder="Apellidos">
+      </div>
+    </div>
+
+    <div class="form-row">
+
+      <div class="form-group col-6">
+        <select class="custom-select" [(ngModel)]="personUpdate.sexo" [ngModelOptions]="{standalone: true}">
+          <option [ngValue]="undefined">Sexo</option>
+          <option *ngFor="let gender of gendersList" [ngValue]="gender">{{ gender }}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-6">
+        <input type="date" class="form-control" name="fecha" [(ngModel)]="personUpdate.fecha" placeholder="Fecha">
+      </div>
+    </div>
+
+    <div class="form-row" style="margin-bottom: 10px">
+      <div class="col-12">
+        <input type="email" class="form-control" name="email" [(ngModel)]="personUpdate.email" placeholder="Email">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-3">
+
+      </div>
+      <div class="col-9">
+        <button style="margin: 5px" type="button" class="btn btn-success" (click)="savePersonUpdate()">Guardar</button>
+        <button style="margin: 5px" type="button" class="btn btn-success"
+          (click)="toggleButtonUpdate()">Cancelar</button>
+      </div>
+    </div>
+
+  </form>
+</ng-container>
